@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+    background: #E2DECF;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    text-align: center;
+    margin-top: 50px;
+}
+
+h1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+h1 img {
+    margin-left: 10px;
+    height: 50px;
+}
+
+#input-section, #result-section {
+    display: none; /* Nascondi entrambe le sezioni inizialmente */
+}
+
+#input-section.active, #result-section.active {
+    display: block; /* Mostra la sezione attiva */
+}
+
+.result-text {
+    font-size: 20px;
+    margin: 10px 0;
+}
+
+.large-image {
+    margin-top: 20px;
+    max-width: 200px;
+    height: auto;
+}
+</style>
+<script>
+function handleSubmit() {
+    const totalInput = document.getElementById('total');
+    const total = totalInput.value.trim();
+
+    // Controlla che il campo non sia vuoto e contenga solo numeri
+    if (total === '' || isNaN(total) || parseFloat(total) < 0) {
+        alert('Per favore, inserisci un valore numerico valido.');
+        totalInput.value = ''; // Pulisce il campo in caso di errore
+        return;
+    }
+
+    // Mostra la sezione del risultato e nasconde il campo di input
+    document.getElementById('input-section').classList.remove('active');
+    document.getElementById('result-section').classList.add('active');
+    document.getElementById('display-total').innerText = parseFloat(total).toFixed(2) + '€'; // Mostra il totale con 2 decimali
+}
+</script>
+</head>
+<body>
+<div class="container">
+    <!-- Sezione iniziale -->
+    <div id="input-section" class="active">
+        <label for="total">Totale:</label>
+        <input type="number" id="total" placeholder="Inserisci il totale" step="0.01" min="0">
+        <button onclick="handleSubmit()">Invia</button>
+    </div>
+
+    <!-- Sezione con il risultato -->
+    <div id="result-section">
+        <h1>
+            FrescoMarket
+            <img src="https://i.ibb.co/ccvczpY/DALL-E-2024-11-23-21-30-05-A-vibrant-and-fresh-logo-icon-for-a-supermarket-named-Fresco-Market.png" alt="Logo">
+        </h1>
+        <p class="result-text">Totale: <span id="display-total"></span></p>
+        <img class="large-image" src="https://i.ibb.co/fHsr5kC/Untitled-1.pngds" alt="Grande immagine">
+        <p>Grazie per aver scelto i nostri servizi!<p>
+    </div>
+</div>
+</body>
+</html>
